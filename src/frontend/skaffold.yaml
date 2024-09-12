@@ -35,7 +35,7 @@ test:
           pip install -r requirements.txt --quiet
           pylint --rcfile=../../.pylintrc *.py
         timeoutSeconds: 180
-        dependencies: 
+        dependencies:
           paths:
             - "**/*.py"
             - "../../.pylintrc"
@@ -51,7 +51,6 @@ profiles:
     kustomize:
       paths:
       - k8s/overlays/development
-      - ../../iac/acm-multienv-cicd-anthos-autopilot/overlays/development
 - name: staging
   manifests:
     kustomize:
@@ -62,13 +61,3 @@ profiles:
     kustomize:
       paths:
       - k8s/overlays/production
-- name: production-fwi
-  manifests:
-    kustomize:
-      paths:
-      - k8s/overlays/production-fwi
-- name: production-fwi-ingress
-  manifests:
-    kustomize:
-      paths:
-      - k8s/overlays/production-fwi-ingress

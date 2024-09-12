@@ -11,23 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: frontend-production
-resources:
-  - ../../base
-  - gateway.yaml
-  - ingress.yaml
-  - namespace.yaml
-  - destinationrule.yaml
-components:
-  - ../../../../components/production
-transformers:
-  - |-
-    apiVersion: builtin
-    kind: NamespaceTransformer
-    metadata:
-      name: notImportantHere
-      namespace: frontend-production
-    unsetOnly: true
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: frontend-nonproduction
+  labels:
+    istio-injection: enabled # enable ASM sidecar injection on namespace

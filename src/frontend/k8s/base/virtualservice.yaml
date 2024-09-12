@@ -12,22 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: frontend-production
-resources:
-  - ../../base
-  - gateway.yaml
-  - ingress.yaml
-  - namespace.yaml
-  - destinationrule.yaml
-components:
-  - ../../../../components/production
-transformers:
-  - |-
-    apiVersion: builtin
-    kind: NamespaceTransformer
-    metadata:
-      name: notImportantHere
-      namespace: frontend-production
-    unsetOnly: true
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: frontend
+spec:
+  gateways:
+  - asm-ingress/asm-ingressgateway
+  hosts:
+  - '*'
+  http:
+  - route:
+    - destination:
+        host: frontend
+        port:
+          number: 80
+
