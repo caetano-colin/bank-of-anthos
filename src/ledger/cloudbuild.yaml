@@ -43,7 +43,7 @@ steps:
       - "releases"
       - "create"
       - "$_SERVICE-$SHORT_SHA"
-      - "--delivery-pipeline=$_SERVICE"
+      - "--delivery-pipeline=$_CLOUDDEPLOY_PIPELINE_NAME"
       - "--build-artifacts=/workspace/artifacts.json"
       - "--skaffold-file=src/$_TEAM/$_SERVICE/skaffold.yaml"
       - "--region=$LOCATION"
